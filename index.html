@@ -31,6 +31,7 @@
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.7;
+            overflow-x: hidden; /* Prevents horizontal scroll on mobile */
         }
 
         /* Navigation */
@@ -61,6 +62,7 @@
             list-style: none;
             gap: 2rem;
             align-items: center;
+            transition: all 0.3s ease;
         }
 
         nav ul li a {
@@ -85,6 +87,14 @@
         .nav-cta:hover {
             background: var(--accent-hover) !important;
             color: white !important;
+        }
+
+        /* Mobile Menu Button */
+        .menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
         }
 
         /* Sections */
@@ -170,6 +180,12 @@
             box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.2);
         }
 
+        .btn-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
         .btn {
             padding: 14px 32px;
             background: var(--accent-blue);
@@ -179,6 +195,7 @@
             font-weight: 600;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             transition: all 0.3s ease;
             box-shadow: var(--shadow);
@@ -196,7 +213,6 @@
             background: transparent;
             color: var(--accent-blue);
             border: 2px solid var(--accent-blue);
-            margin-left: 1rem;
         }
 
         .btn-outline:hover {
@@ -207,7 +223,7 @@
         /* Services Section */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
@@ -254,7 +270,7 @@
         .skill-tag {
             background: var(--white);
             color: var(--text-dark);
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 50px;
             font-weight: 600;
             box-shadow: var(--shadow);
@@ -263,6 +279,7 @@
             gap: 8px;
             transition: all 0.3s ease;
             border: 1px solid #e2e8f0;
+            font-size: 0.9rem;
         }
 
         .skill-tag:hover {
@@ -283,7 +300,7 @@
         /* Projects Section */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
@@ -330,7 +347,7 @@
         /* Contact Section */
         .contact-wrap {
             background: var(--white);
-            padding: 4rem 2rem;
+            padding: 3rem 2rem;
             border-radius: 16px;
             box-shadow: var(--shadow-lg);
             text-align: center;
@@ -339,14 +356,14 @@
         }
 
         .contact-wrap h3 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
         }
 
         .contact-wrap p {
             color: var(--text-muted);
             margin-bottom: 2rem;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .social-links {
@@ -354,6 +371,7 @@
             justify-content: center;
             gap: 1.5rem;
             margin-top: 2rem;
+            flex-wrap: wrap;
         }
 
         .social-links a {
@@ -387,17 +405,96 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        /* Responsive */
+        /* =========================================
+           MOBILE RESPONSIVENESS (MEDIA QUERIES)
+           ========================================= */
         @media (max-width: 900px) {
+            /* Navbar adjustments */
+            .menu-btn {
+                display: block; /* Show hamburger icon */
+            }
+
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                padding: 1.5rem 0;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); /* Hidden by default using clip-path for smooth animation */
+                transition: clip-path 0.4s ease-in-out;
+            }
+
+            nav ul.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* Reveals menu */
+            }
+
+            nav ul li {
+                margin: 1rem 0;
+            }
+
+            /* Hero Section stacking */
             #home {
                 flex-direction: column-reverse;
                 text-align: center;
-                padding-top: 150px;
+                padding-top: 130px;
+                padding-bottom: 60px;
             }
-            .hero-text h1 { font-size: 2.5rem; }
-            .btn-outline { margin-left: 0; margin-top: 1rem; display: block; }
-            nav ul { display: none; }
-            .profile-pic { width: 250px; height: 250px; }
+
+            .hero-text h1 { 
+                font-size: 2.2rem; 
+                margin-top: 1.5rem;
+            }
+
+            .typewriter {
+                font-size: 1.2rem;
+                height: 30px;
+            }
+
+            .btn-container {
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .btn-container .btn {
+                width: 100%; /* Full width buttons on mobile */
+            }
+
+            /* Profile picture scaling */
+            .profile-pic { 
+                width: 220px; 
+                height: 220px; 
+                border-width: 5px;
+            }
+
+            /* General section spacing */
+            section {
+                padding: 60px 5% 40px;
+            }
+
+            h2.section-title {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            /* Grids force to 1 column on very small screens */
+            .projects-grid, .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-wrap {
+                padding: 2rem 1.5rem;
+            }
+            
+            .contact-wrap .btn {
+                font-size: 1rem !important;
+                padding: 12px 20px !important;
+                width: 100%;
+                box-sizing: border-box;
+                word-break: break-all; /* Prevents long emails from breaking layout */
+            }
         }
     </style>
 </head>
@@ -405,11 +502,14 @@
 
     <nav>
         <a href="#home" class="logo">HS.</a>
-        <ul>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Work</a></li>
-            <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+        <div class="menu-btn" id="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul id="nav-links">
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#projects" class="nav-link">Work</a></li>
+            <li><a href="#contact" class="nav-cta nav-link">Hire Me</a></li>
         </ul>
     </nav>
 
@@ -418,16 +518,17 @@
             <h1>Hi, I'm <span>Harshikesh Singh</span></h1>
             <div class="typewriter" id="typewriter"></div>
             
-            <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem; max-width: 500px;">
+            <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem; max-width: 500px; margin-left: auto; margin-right: auto;">
                 I help businesses scale by building secure, high-performance backend systems and multi-tenant architectures.
             </p>
-            <div>
+            <div class="btn-container">
                 <a href="#contact" class="btn"><i class="fas fa-paper-plane"></i> Discuss Your Project</a>
                 <a href="#projects" class="btn btn-outline"><i class="fas fa-code"></i> View My Work</a>
             </div>
         </div>
         <div class="hero-image">
             <img src="WhatsApp Image 2026-04-21 at 11.58.24 PM.jpeg" alt="Harshikesh Singh" class="profile-pic">
+
         </div>
     </section>
 
@@ -461,10 +562,11 @@
             <div class="skill-tag"><i class="fas fa-network-wired"></i> RESTful APIs</div>
             <div class="skill-tag"><i class="fab fa-react"></i> React.js</div>
             <div class="skill-tag"><i class="fab fa-angular"></i> Angular Basics</div>
-            <div class="skill-tag"><i class="fas fa-credit-card"></i> Payment Gateways (Razorpay)</div>
+            <div class="skill-tag"><i class="fas fa-credit-card"></i> Payment Gateways</div>
+            <div class="skill-tag"><i class="fas fa-shield-alt"></i> App Security</div>
             <div class="skill-tag"><i class="fas fa-sitemap"></i> Microservices</div>
             <div class="skill-tag"><i class="fab fa-git-alt"></i> Git / CI/CD</div>
-            <div class="skill-tag"><i class="fab fa-linux"></i> Linux Environments</div>
+            <div class="skill-tag"><i class="fab fa-linux"></i> Linux</div>
         </div>
     </section>
 
@@ -476,10 +578,9 @@
                 <h3>Dynamic Bidding Platform</h3>
                 <p>A B2B tender and quote marketplace allowing buyers to post requirements with dynamic parameters and sellers to bid securely.</p>
                 <ul>
-                    <li>Developed the complete backend architecture using Java Spring Boot, REST APIs, and PostgreSQL.</li>
-                    <li>Integrated Razorpay for seamless Earnest Money Deposit (EMD) capture, refunds, and settlements.</li>
-                    <li>Built robust role-based access control (Admin, Buyer, Seller) using Spring Security and JWT.</li>
-                    <li>Contributed to frontend development using React to build responsive UI components.</li>
+                    <li>Developed backend architecture using Java Spring Boot, REST APIs, and PostgreSQL.</li>
+                    <li>Integrated Razorpay for seamless EMD capture, refunds, and settlements.</li>
+                    <li>Built role-based access control using Spring Security and JWT.</li>
                 </ul>
             </div>
 
@@ -487,9 +588,9 @@
                 <h3>e-Governance Platform: UPYOG Haryana</h3>
                 <p>Implemented the Finance and Accounting module for 87 Urban Local Bodies (ULBs) across the state.</p>
                 <ul>
-                    <li>Designed backend APIs for voucher processing, bill register, and chart of accounts modules.</li>
-                    <li>Performed gap analysis and system enhancements to align with regional finance workflows.</li>
-                    <li>Maintained Spring Boot microservices integrated tightly with existing e-Governance modules.</li>
+                    <li>Designed backend APIs for voucher processing, bill register, and chart of accounts.</li>
+                    <li>Performed gap analysis to align with regional finance workflows.</li>
+                    <li>Maintained Spring Boot microservices integrated tightly with existing modules.</li>
                 </ul>
             </div>
 
@@ -497,15 +598,15 @@
                 <h3>MCD Accounts Portal: UPYOG Delhi</h3>
                 <p>Customized and secured the financial governance module for the Municipal Corporation of Delhi.</p>
                 <ul>
-                    <li>Remediated backend vulnerabilities on the mcdaccounts portal by implementing BCrypt hashing and AES-GCM encryption.</li>
-                    <li>Extended existing microservices to support Delhi-specific accounting and finance reporting requirements.</li>
-                    <li>Ensured seamless data integration with external property tax and procurement modules.</li>
+                    <li>Remediated backend vulnerabilities implementing BCrypt hashing and AES-GCM encryption.</li>
+                    <li>Extended microservices to support Delhi-specific reporting requirements.</li>
+                    <li>Ensured seamless data integration with external property tax modules.</li>
                 </ul>
             </div>
 
             <div class="project-card">
                 <h3>Campus Automation Ecosystem</h3>
-                <p>A comprehensive digital solution to automate academic, administrative, and financial operations for educational institutions.</p>
+                <p>A comprehensive digital solution to automate academic, administrative, and financial operations.</p>
                 <ul>
                     <li>Developed backend services for fee management and attendance tracking.</li>
                     <li>Integrated REST APIs with Angular frontend for real-time data flow.</li>
@@ -518,21 +619,22 @@
     <section id="contact">
         <div class="contact-wrap">
             <h3>Ready to start your next project?</h3>
-            <p>I'm currently available for freelance opportunities. Whether you need a database structured from scratch or a complex API built out, let's talk.</p>
+            <p>I'm currently available for freelance opportunities. Let's talk.</p>
             <a href="mailto:harshikeshsingh.2000@gmail.com" class="btn" style="font-size: 1.2rem; padding: 15px 40px;">
                 <i class="fas fa-envelope"></i> harshikeshsingh.2000@gmail.com
             </a>
             
             <div class="social-links">
                 <a href="tel:+919771719213" title="Call Me"><i class="fas fa-phone"></i></a>
-                <a href="https://github.com/harsh1470/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/harshikesh-singh/" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a> 
+                <a href="https://github.com/harshikesh-sspl" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a> 
             </div>
         </div>
     </section>
 
     <script>
-        const textArray = ["Freelance Backend Developer", "Spring Boot Expert", "Database Architect", "API Specialist"];
+        // Typing Effect Script
+        const textArray = ["Java Backend Developer", "Spring Boot Expert", "Database Architect", "API Specialist"];
         let textIndex = 0;
         let charIndex = 0;
         const speed = 100;
@@ -563,6 +665,30 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             setTimeout(typeWriter, speed);
+        });
+
+        // Mobile Menu Toggle Script
+        const menuBtn = document.getElementById('menu-btn');
+        const navLinks = document.getElementById('nav-links');
+        const links = document.querySelectorAll('.nav-link');
+
+        // Toggle menu when clicking the hamburger icon
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // Change icon from bars to times (X)
+            if(navLinks.classList.contains('active')) {
+                menuBtn.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // Close menu when a link is clicked
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
         });
     </script>
 </body>
