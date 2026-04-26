@@ -313,6 +313,8 @@
             display: flex;
             flex-direction: column;
             border: 1px solid #e2e8f0;
+            height: 100%;
+
         }
 
         .project-card:hover {
@@ -338,11 +340,38 @@
             color: var(--text-muted);
             font-size: 0.9rem;
             margin-top: auto;
+            margin-bottom: 1.5rem;
         }
 
         .project-card ul li {
             margin-bottom: 0.5rem;
         }
+
+        /* Project Live Link Button */
+        .project-link-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background-color: var(--bg-light);
+            color: var(--accent-blue);
+            border: 1px solid var(--accent-blue);
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: auto; /* Pushes button to the bottom of the card */
+            align-self: flex-start;
+        }
+
+        .project-link-btn:hover {
+            background-color: var(--accent-blue);
+            color: var(--white);
+        }
+
+
 
         /* Contact Section */
         .contact-wrap {
@@ -522,7 +551,7 @@
                 I help businesses scale by building secure, high-performance backend systems and multi-tenant architectures.
             </p>
             <div class="btn-container">
-                <a href="#contact" class="btn"><i class="fas fa-paper-plane"></i> Discuss Your Project</a>
+                <a href="HarshikeshSingh.pdf" download class="btn"><i class="fas fa-download"></i> Download Resume</a>
                 <a href="#projects" class="btn btn-outline"><i class="fas fa-code"></i> View My Work</a>
             </div>
         </div>
@@ -582,16 +611,10 @@
                     <li>Integrated Razorpay for seamless EMD capture, refunds, and settlements.</li>
                     <li>Built role-based access control using Spring Security and JWT.</li>
                 </ul>
-            </div>
+                    <a href="https://test.supplr.in/" target="_blank" class="project-link-btn">
+                    <i class="fas fa-external-link-alt"></i> View Live Project
+                </a>
 
-            <div class="project-card">
-                <h3>e-Governance Platform: UPYOG Haryana</h3>
-                <p>Implemented the Finance and Accounting module for 87 Urban Local Bodies (ULBs) across the state.</p>
-                <ul>
-                    <li>Designed backend APIs for voucher processing, bill register, and chart of accounts.</li>
-                    <li>Performed gap analysis to align with regional finance workflows.</li>
-                    <li>Maintained Spring Boot microservices integrated tightly with existing modules.</li>
-                </ul>
             </div>
 
             <div class="project-card">
@@ -602,6 +625,24 @@
                     <li>Extended microservices to support Delhi-specific reporting requirements.</li>
                     <li>Ensured seamless data integration with external property tax modules.</li>
                 </ul>
+                    <a href="https://mcdfinance.mcd.gov.in" target="_blank" class="project-link-btn">
+                    <i class="fas fa-external-link-alt"></i> View Live Project
+                </a>
+
+            </div>
+
+            <div class="project-card">
+                <h3>e-Governance Platform: UPYOG Haryana</h3>
+                <p>Implemented the Finance and Accounting module for 87 Urban Local Bodies (ULBs) across the state.</p>
+                <ul>
+                    <li>Designed backend APIs for voucher processing, bill register, and chart of accounts.</li>
+                    <li>Performed gap analysis to align with regional finance workflows.</li>
+                    <li>Maintained Spring Boot microservices integrated tightly with existing modules.</li>
+                </ul>
+                    <a href="https://dev-hrupyog.sparrowsoftech.in/digit-ui/employee/user/login" target="_blank" class="project-link-btn">
+                    <i class="fas fa-external-link-alt"></i> View Live Project
+                </a>
+
             </div>
 
             <div class="project-card">
@@ -612,6 +653,10 @@
                     <li>Integrated REST APIs with Angular frontend for real-time data flow.</li>
                     <li>Implemented secure user roles and permissions using Spring Security.</li>
                 </ul>
+                    <a href="#" target="_blank" class="project-link-btn">
+                    <i class="fas fa-external-link-alt"></i> View Live Project
+                </a>
+
             </div>
         </div>
     </section>
